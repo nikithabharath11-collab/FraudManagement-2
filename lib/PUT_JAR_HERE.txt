@@ -1,0 +1,2 @@
+Copy mysql-connector-j-<version>.jar (MySQL Connector/J, e.g. 9.1.0) into this lib folder.
+Download: https://dev.mysql.com/downloads/connector/j/  (choose "Platform Independent", unzip, copy only the .jar)
