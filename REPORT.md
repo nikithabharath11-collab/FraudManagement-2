@@ -3,7 +3,7 @@
 **Name:** B NIKITHA (Nikitha Bharath)  **Reg. No.:** 25BCE2517  **Course:** B.Tech CSE, 3rd semester, VIT Vellore
 **Database:** `fraud_management` (8 tables + 2 views + 1 trigger + 1 stored procedure + indexes, MySQL 8)
 
-**Live demo (the real JavaFX app, streamed to the browser):** https://fraudmgmt.onrender.com/fx/fraud/  
+**Live website (web version of the same app, pure Java with Vaadin):** https://nikithabharath11-collab.github.io/fraud-management/  
 **Download this project (zip):** https://fraudmgmt.onrender.com/fx/downloads/FraudManagement-2.zip  
 **GitHub repository:** https://github.com/nikithabharath11-collab/FraudManagement-2
 
@@ -41,6 +41,10 @@ FraudManagement-2
 │   └── guard_schema.sql       ← tables, sample data, views, trigger, procedure, indexes
 ├── lib
 │   └── PUT_JAR_HERE.txt       ← put mysql-connector-j-x.x.x.jar here
+├── web                        ← web version for the live link (Vaadin, pure Java)
+│   ├── pom.xml                ← Maven build (Vaadin, embedded Jetty, MySQL driver)
+│   ├── run_web.bat            ← builds and starts it on http://localhost:8080
+│   └── src/main/java/guard/     ← GuardView.java (screens), GuardDb.java (same JDBC code), Main.java
 ├── screenshots                ← one picture of every tab
 └── REPORT.md
 ```
@@ -110,11 +114,17 @@ Primary / foreign keys, JOIN and LEFT JOIN, sub-queries, aggregate functions, 2 
 ## 8. Screenshots
 `screenshots/01_dashboard.png` … `12_monthly_statements.png` – one picture per tab (the footer with my name is visible on every one).
 
-## 9. Live demo
-The same `GuardApp` runs on a free Render server inside a virtual screen (Xvfb) and is shown in the browser with noVNC,
-so the page at https://fraudmgmt.onrender.com/fx/fraud/ is the real JavaFX window, not a web copy.
-It is one shared session: everyone who opens the link sees and uses the same window. The free server sleeps when idle,
-so the first visit can take up to a minute.
+## 9. Live website (web version, folder `web/`)
+The JavaFX desktop app above is the main project. For the live link I wrote a web version of the same screens in Java
+with **Vaadin Flow** (free, Apache 2.0): `web/src/main/java/guard/GuardView.java` builds the same tabs, forms, tables,
+colour tags and name footer with Vaadin components instead of JavaFX controls, and `GuardDb.java` is the same JDBC class
+as the desktop app (only a `package` line added). There are no HTML or CSS files of my own; Vaadin turns the Java
+components into the page and sends every click back to the Java code on the server.
+
+It runs on embedded Jetty at https://fraudmgmt.onrender.com/web/fraud (https://nikithabharath11-collab.github.io/fraud-management/ opens it) and uses its own copy of
+the same schema, so visitors can try the forms freely. The free server sleeps when idle, so the first visit can take
+up to a minute. To run it on your own PC: install JDK 21 and Maven 3.9, load the schema, then run `web\run_web.bat`
+and open http://localhost:8080/fraud.
 
 ---
 I used AI assistance for parts of the code and deployment, as allowed for this project.
